@@ -1,0 +1,67 @@
+<div class="container">
+    <h1>Burger!!!</h1>
+    <br />
+    <img src="/assets/img/exploded-burger.jpg" id="burgerClipArt">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-4">
+            <h2>Burgers Time!!!</h2>
+            <div id="burgersToEat">
+                <ul>
+                    {{#each burgers}}
+                    {{#unless this.devoured}}
+                    <li>
+                        {{this.burger_name}}
+
+                        <form action="/{{this.id}}?_method=PUT" method="POST" id="devourItForm">
+                            <input id="burgerDisplay" type="hidden" name="devoured" value="true">
+                            <button type="submit" id="devourItButton">Devour it!!!</button>
+                        </form>
+                    </li>
+                    {{/unless}}
+                    {{/each}}
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+        <div class="col-md-4">
+            <h2>Devoured Burgers!</h2>
+            <div id="burgersDevoured">
+                <ul>
+                    {{#each burgers}}
+                    {{#if this.devoured}}
+                    <li>
+                        {{this.burger_name}}
+                        <form action="/{{this.id}}?_method=PUT" method="POST" id="orderMoreForm">
+                            <input type="hidden" name="devoured" value="false">
+                            <button type="submit" id="orderAnotherButton">Add more!</button>
+                        </form>
+                        {{#each customer}}
+                        {{this.name}}
+                        {{/each}}
+                    </li>
+                    {{/if}}
+                    {{/each}}
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <h2>Add a Burger</h2>
+            <form class="create-update-form" action="/" method="POST" id="updateForm">
+                <div class="form-group">
+                    <label for="ca">Burger Name:</label>
+                    <input type="text" id="ca" name="burger_name">
+                </div>
+                <div class="form-group">
+                </div>
+                <br />
+                <button type="submit" id="submitBurgerButton">Add Burger</button>
+            </form>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>
